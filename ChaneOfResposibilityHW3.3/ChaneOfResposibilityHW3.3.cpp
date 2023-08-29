@@ -14,9 +14,16 @@ enum class Type {
 
 class LogMessage {
 public:
-
-    Type type() const;
-    const std::string& message() const;
+    LogMessage(Type type, std::string const &message): type_(type), message_(message){}
+    Type type() const {
+        return type_;
+    }
+    const std::string& message() const {
+        return message_;
+    }
+private:
+    Type type_;
+    const std::string message_;
 };
 
 class Handler {
@@ -86,31 +93,18 @@ int main() {
     UnknownHandler unknown_handler;
 
 
-
-    // Usage example
-    //LogMessage* message = { Type::UNKNOWN, "Error occurred" };
-    LogMessage message; //= { Type::UNKNOWN, "Error occurred" };
-
-    unknown_handler.handle(message);
+    LogMessage message{ Type::UNKNOWN, "Error occurred" };
 
 
-    /*message.type() = Type::WARNING;
-    message.message() = "Warning message";*/
-
-
-    /*auto error_handler = std::make_unique<ErrorHandler>(std::move(fatal_handler));
-    auto warning_handler = std::make_unique<WarningHandler>(std::move(error_handler));
-    auto unknown_handler = std::make_unique<UnknownHandler>(std::move(warning_handler));*/
-
-    unknown_handler.handle(message);
-    /*try {
-        unknown_handler->handle(message);
-        unknown_handler->handle(message);
-        unknown_handler->handle(message);
+    try {
+        fatal_handler.handle(message);
+        //error_handler.handle(message);
+        //warning_handler.handle(message);
+        //unknown_handler.handle(message);
     }
     catch (const std::exception& e) {
         std::cout << e.what() << std::endl;
-    }*/
+    }
 
 
     return 0;
