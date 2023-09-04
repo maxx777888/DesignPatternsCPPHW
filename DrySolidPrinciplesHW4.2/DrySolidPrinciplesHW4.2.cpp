@@ -2,12 +2,7 @@
 #include <fstream>
 
 
-enum class Format
-{
-    kText,
-    kHTML,
-    kJSON
-};
+
 
 class Printable
 {
@@ -26,7 +21,7 @@ public:
     }
 private:
     std::string data_;
-    Data html = { Format::kHTML };
+    //Data html =  Data::Format::kHTML;
     
 };
 
@@ -39,7 +34,7 @@ public:
     }
 private:
     std::string data_;
-    Data c_text = { Format::kText };
+    //Data c_text = { Data::Format::kText };
 };
 
 class C_JSON : public Printable {
@@ -51,12 +46,18 @@ public:
     }
 private:
     std::string data_;
-    Data json = { Format::kJSON };
+    //Data json = { Data::Format::kJSON };
 };
 
 class Data : public C_HTML, public C_TEXT, public C_JSON
 {
 public:
+    enum class Format
+    {
+        kText,
+        kHTML,
+        kJSON
+    };
     
     Data(Format format) :  format_(format) {}
     

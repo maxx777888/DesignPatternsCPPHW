@@ -1,0 +1,3 @@
+<html>This is html string<html/>
+This is text string
+{ "data": "This is json string"}
